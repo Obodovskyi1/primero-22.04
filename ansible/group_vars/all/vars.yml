@@ -10,3 +10,4 @@ qi_install_docker_daemon_json_content: |
     "log-driver": "journald",
     "userns-remap": "{{ application_container_username }}"
   }
+use_external_certs: 'false'

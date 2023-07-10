@@ -31,17 +31,6 @@
   tags:
   - 'always'
 
-- name: 'Pull Primero from Git'
-  git:
-    repo: '{{ primero_repo|default("https://github.com/primeroIMS/primero.git") }}'
-    dest: '/srv/primero/'
-    version: '{{ primero_repo_branch }}'
-    key_file: '/root/.ssh/primero_deployment_key'
-    accept_hostkey: 'yes'
-  become: yes
-  tags:
-  - 'always'
-
 - name: 'create the local.env file'
   template:
     src: local.env.j2
@@ -138,7 +127,7 @@
     PRIMERO_IMAGE_REPOSITORY: '{{ primero_image_repositroy|default("primeroims") }}'
     PRIMERO_DEPLOY_NODB: '{{ primero_deploy_nodb|default("false") }}'
     PRIMERO_POSTGRES_VERSION: '{{ primero_postgres_version }}'
-  when: primero_configuration_path is not defined
+  when: primero_configuration_path is defined
   tags:
   - 'never'
   - 'configure'
